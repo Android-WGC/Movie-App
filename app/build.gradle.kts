@@ -1,10 +1,23 @@
+import java.io.FileInputStream
+import java.util.Properties
+private val API_KEY_FILE_PROPERTIES = "apiKey.properties"
+private val API_KEY_NAME = "API_KEY"
+private val BASE_URL_NAME = "BASE_URL"
+private val BASE_URL_IMAGE_NAME = "BASE_URL_IMAGE"
+
+val apiKeyPropertiesFile: File = rootProject.file(API_KEY_FILE_PROPERTIES)
+val apiKeyProperties = Properties().apply {
+    load(FileInputStream(apiKeyPropertiesFile))
+}
+val apiKey = apiKeyProperties[API_KEY_NAME].toString()
+val baseUrl = apiKeyProperties[BASE_URL_NAME].toString()
+val baseUrlImage = apiKeyProperties[BASE_URL_IMAGE_NAME].toString()
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
     id("com.google.dagger.hilt.android")
     id("kotlin-kapt")
 }
-
 android {
     namespace = "br.com.wgc.movieapp"
     compileSdk = 34
@@ -20,6 +33,9 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+        buildConfigField("String", API_KEY_NAME, apiKey)
+        buildConfigField("String", BASE_URL_NAME, baseUrl)
+        buildConfigField("String", BASE_URL_IMAGE_NAME, baseUrlImage)
     }
 
     buildTypes {
