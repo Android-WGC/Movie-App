@@ -4,8 +4,9 @@ import br.com.wgc.movieapp.core.data.remote.MovieService
 import br.com.wgc.movieapp.core.data.remote.response.popular.MovieResponse
 import br.com.wgc.movieapp.core.paging.MoviePagingSource
 import br.com.wgc.movieapp.movie_popular_feature.domain.source.MoviePopularRemoteDataSource
+import javax.inject.Inject
 
-class MoviePopularRemoteDataSourceImpl constructor(
+class MoviePopularRemoteDataSourceImpl @Inject constructor(
     private val service: MovieService
 ) : MoviePopularRemoteDataSource {
     override fun getPopularMoviePagingSource(): MoviePagingSource {
